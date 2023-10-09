@@ -2,4 +2,125 @@
 
 \minitoc
 
-\note{À venir}
+\section*{Illustrations du cours}
+\addcontentsline{toc}{section}{Illustrations du cours}
+
+\begin{exo}[Exercice 1, vocabulaire sur les mots]
+\begin{enumerate}
+    \item Donner tous les préfixes propres du mot \(babbb\). \\
+    \item Donner tous les facteurs du mot \(babbb\). \\
+    \item Donner tous les sous-mots de \(babbb\).
+\end{enumerate}
+\end{exo}
+
+\begin{exo}[Exercice 2, opérations sur les langages]
+On considère un alphabet \(\Sigma=\accol{a,b}\) et deux langages \(L_1=\accol{\epsilon,a,ba}\) et \(L_2=\accol{a,aa}\).
+
+Donner les éléments des langages suivants : \(L_1\union L_2\), \(L_1^0\), \(L_1^1\), \(L_1L_2\) et \(L_2^3\).
+\end{exo}
+
+\begin{exo}[Exercice 3, langages réguliers, expressions régulières]
+On considère l'alphabet \(\Sigma=\accol{a,b}\).
+
+Représenter par une expression régulière :
+
+\begin{enumerate}[series=ex1.3]
+    \item l'ensemble des mots composés de symboles \(a\) puis de symboles \(b\) ; \\
+    \item l'ensemble des mots qui terminent par \(b\) ; \\
+    \item l'ensemble des mots qui contiennent trois symboles \(a\) consécutifs.
+\end{enumerate}
+
+Exprimer en français l'ensemble des mots dénoté par l'expression régulière :
+
+\begin{enumerate}[resume=ex1.3]
+    \item \(r_4=a\paren{a\divise b}\etoile a\) ; \\
+    \item \(r_5=\paren{a\divise b}\paren{a\divise b}\paren{a\divise b}\) ; \\
+    \item \(r_6=a\etoile ba\etoile\).
+\end{enumerate}
+\end{exo}
+
+\section*{Compléments du cours}
+\addcontentsline{toc}{section}{Compléments du cours}
+
+\begin{exo}[Exercice 4, sous-mot]\thlabel{exo:definitionFormelleSousMot}
+Formaliser la notion de sous-mot en utilisant :
+
+\begin{enumerate}
+    \item une suite de mots et de lettres ; \\
+    \item une suite d'indices strictement croissante ; \\
+    \item une fonction strictement croissante à valeurs entières.
+\end{enumerate}
+\end{exo}
+
+\begin{exo}[Exercice 5, propriétés sur les langages]\thlabel{exo:demonstrationsProprietesLangages}
+Soient \(\Sigma\) un alphabet et \(L,L_1,L_2\) des langages sur \(\Sigma\).
+
+Démontrer les propriétés suivantes :
+
+\begin{enumerate}
+    \item \(L.\ensvide=\ensvide.L=\ensvide\) \\
+    \item \(L.\accol{\epsilon}=\accol{\epsilon}.L=L\) \\
+    \item \(L^n.L^m=L^{n+m}\) \\
+    \item \(L.\paren{L_1\union L_2}=L.L_1\union L.L_2\) \\
+    \item \(L\etoile.L=L.L\etoile=L^+\) \\
+    \item \(L\etoile=L^+\union\accol{\epsilon}\) \\
+    \item \(\paren{L\etoile}\etoile=L\etoile\) \\
+    \item \(L.\paren{L_1\inter L_2}\subset L.L_1\inter L.L_2\) et trouver un contre-exemple pour l'inclusion réciproque.
+\end{enumerate}
+\end{exo}
+
+\section*{Exercices}
+\addcontentsline{toc}{section}{Exercices}
+
+\begin{exo}[Exercice 6, quelques questions sur les mots]
+Soit \(\Sigma\) un alphabet.
+
+\begin{enumerate}
+    \item Soient \(x,y,z\in\Sigma\etoile\). Montrer que \(xy=xz\ssi y=z\) et que \(yx=zx\ssi y=z\). \\
+    \item Soient \(u,v,w\in\Sigma\etoile\) tels que \(u\leq_pw\) et \(v\leq_pw\). Montrer que \(u\leq_pv\) ou \(v\leq_pu\). \\
+    \item Soient \(a,b\in\Sigma\) et \(u\in\Sigma\etoile\) tels que \(au=ub\). Montrer que \(a=b\) et \(u\in\accol{a}\etoile\). \\
+    \item Soient \(x,y,u,v\in\Sigma\etoile\) tels que \(uv=xy\). Montrer qu'il existe un unique mot \(t\in\Sigma\etoile\) tel que \(u=xt\) et \(y=tv\) ou \(x=ut\) et \(v=ty\).
+\end{enumerate}
+\end{exo}
+
+\begin{exo}[Exercice 7, dénombrement]
+Soit \(\Sigma\) un alphabet. On considère un mot \(m\in\Sigma\etoile\) de \(n\) symboles distincts.
+
+\begin{enumerate}
+    \item Combien le mot \(m\) a-t-il de préfixes, suffixes, facteurs et sous-mots ? \\
+    \item Que peut-on dire si les symboles ne sont pas supposés distincts ?
+\end{enumerate}
+\end{exo}
+
+\begin{exo}[Exercice 8, préfixe : une relation d'ordre]
+Soit \(\Sigma\) un alphabet.
+
+\begin{enumerate}
+    \item Justifier que \(\leq_p\) définit une relation d'ordre sur \(\Sigma\etoile\). \\
+    \item Cet ordre est-il total ? \\
+    \item Quel est l'ordre strict associé ?
+\end{enumerate}
+\end{exo}
+
+\begin{exo}[Exercice 9, racine carrée d'un langage]
+Soit \(\Sigma\) un alphabet. Pour \(L\in\P{\Sigma\etoile}\), on définit \(\sqrt{L}=\accol{u\in\Sigma\etoile\tq u^2\in L}\).
+
+\begin{enumerate}
+    \item Que vaut \(\sqrt{L}\) pour \(L=\accol{\epsilon,a,b,aa,ab,bbb,bbbb}\) ? \\
+    \item Montrer que \(\quantifs{\tpt L\in\P{\Sigma\etoile}}L\subset\sqrt{L^2}\). Trouver un contre-exemple montrant qu'il n'y a pas égalité.
+\end{enumerate}
+\end{exo}
+
+\begin{exo}[Exercice 10, quotient à gauche d'un langage]
+Soit \(\Sigma\) un alphabet. Pour \(L\in\P{\Sigma\etoile}\) et \(a\in\Sigma\), on définit \(a\inv L=\accol{u\in\Sigma\etoile\tq au\in L}\).
+
+\begin{enumerate}[series=ex1.10]
+    \item Que vaut \(b\inv L\) pour \(L=\accol{\epsilon,a,b,ab,bab,bbbb}\) ?
+\end{enumerate}
+
+Pour \(R,L\in\P{\Sigma\etoile}\), on définit \(R\inv L=\accol{u\in\Sigma\etoile\tq\quantifs{\exists r\in R}ru\in L}\).
+
+\begin{enumerate}[resume=ex1.10]
+    \item Que vaut \(R\inv L\) pour \(R=\accol{a,bb}\) et \(L=\accol{\epsilon,a,b,aa,ab,bab,bbbb}\) ?
+\end{enumerate}
+\end{exo}
