@@ -2,4 +2,296 @@
 
 \minitoc
 
-\note{À venir}
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+\Cf \href{http://j.carcenac.info.free.fr/mpi/Diapo01_LANGAGES_slides.html#/}{diaporama}.
+
+Dans ce cours, on nommera \guillemets{langages réguliers} et \guillemets{langages rationnels} les mêmes objets.
+
+\section{Langage formel}
+
+\subsection{Alphabet, mot}
+
+\begin{defi}
+Un alphabet \(\Sigma\) est un ensemble fini de symboles.
+
+Un mot (sur \(\Sigma\)) est une suite finie de symboles (de \(\Sigma\)).
+\end{defi}
+
+\begin{ex}
+\(m=m_1m_2\dots m_n\) est un mot de \(n\) symboles.
+
+On note \(m=\epsilon\) le mot vide.
+\end{ex}
+
+\begin{nota}
+L'ensemble de tous les mots (sur \(\Sigma\)) est noté \(\Sigma\etoile\) (étoile de Kleene).
+\end{nota}
+
+\begin{nota}
+On note \(\abs{m}\) la longueur du mot \(m\).
+\end{nota}
+
+\begin{prop}
+On a \(\abs{m_1m_2\dots m_n}=n\) et \(\abs{\epsilon}=0\).
+\end{prop}
+
+\begin{nota}
+On note \(\abs{m}_x\) le nombre d'occurrences de \(x\in\Sigma\) dans \(m\).
+\end{nota}
+
+\begin{defi}[Concaténation]
+Soient \(u,v\in\Sigma\etoile\).
+
+On note \(u.v\) ou \(uv\) la concaténation de \(u\) et \(v\).
+
+On pose \[\epsilon\epsilon=\epsilon\qquad\epsilon u=u\epsilon=u.\]
+\end{defi}
+
+\begin{prop}
+Soient \(u,v\in\Sigma\etoile\) et \(x\in\Sigma\).
+
+On a \[\abs{uv}=\abs{u}+\abs{v}\qquad\abs{uv}_x=\abs{u}_x+\abs{v}_x.\]
+\end{prop}
+
+\begin{rem}[HP, lien avec les structures algébriques]
+La concaténation est une loi de composition interne sur \(\Sigma\etoile\).
+
+Elle est non-commutative : on n'a pas \(\quantifs{\forall u,v\in\Sigma\etoile}uv=vu\).
+
+Elle est associative : on a \(\quantifs{\forall u,v,w\in\Sigma\etoile}u\paren{vw}=\paren{uv}w\).
+
+Elle admet \(\epsilon\) comme élément neutre.
+
+On obtient alors que \(\groupe{\Sigma\etoile}[.]\) est un monoïde.
+\end{rem}
+
+\begin{defi}[Puissance]
+Soient \(u\in\Sigma\etoile\) et \(n\in\Ns\).
+
+On définit \(u^n=\underbrace{uu\dots u}_{n\text{ facteurs}}\) et on pose \(u^0=\epsilon\).
+\end{defi}
+
+\begin{rem}
+Pour \(x,y,z\in\Sigma\etoile\), on a \(\paren{xyz}^2=xyzxyz\not=x^2y^2z^2\).
+\end{rem}
+
+\begin{defi}
+Soit \(m\in\Sigma\etoile\).
+
+\begin{itemize}
+    \item \(u\in\Sigma\etoile\) est un préfixe de \(m\) ssi il existe \(v\in\Sigma\etoile\) tel que \(m=uv\). \\ \(u\in\Sigma\etoile\) est un préfixe propre de \(m\) ssi il existe \(v\in\Sigma\etoile\excluant\accol{\epsilon}\) tel que \(m=uv\). \\
+    \item \(u\in\Sigma\etoile\) est un suffixe de \(m\) ssi il existe \(v\in\Sigma\etoile\) tel que \(m=vu\). \\ \(u\in\Sigma\etoile\) est un suffixe propre de \(m\) ssi il existe \(v\in\Sigma\etoile\excluant\accol{\epsilon}\) tel que \(m=vu\). \\
+    \item \(u\in\Sigma\etoile\) est un facteur de \(m\) ssi il existe \(v,w\in\Sigma\etoile\) tel que \(m=vuw\). \\ \(u\in\Sigma\etoile\) est un facteur propre de \(m\) ssi il existe \(v,w\in\Sigma\etoile\excluant\accol{\epsilon}\) tel que \(m=vuw\). \\
+    \item \(u\in\Sigma\etoile\) est un sous-mot de \(m\) si c'est une suite extraite de \(m\) (\cf \thref{exo:definitionFormelleSousMot} pour une définition formelle). \\
+\end{itemize}
+\end{defi}
+
+\begin{ex}
+\Cf exercices.
+\end{ex}
+
+\begin{rem}
+\(\epsilon\) est un préfixe, un suffixe, un facteur et un sous-mot de tout mot \(m\in\Sigma\etoile\).
+\end{rem}
+
+\begin{rem}
+Soient \(u,m\in\Sigma\etoile\).
+
+On a les implications suivantes : \[\begin{aligned}
+&u\text{ est un préfixe de }m\imp u\text{ est un facteur de }m \\
+&u\text{ est un suffixe de }m\imp u\text{ est un facteur de }m \\
+&u\text{ est un facteur de }m\imp u\text{ est un sous-mot de }m \\
+\end{aligned}\]
+\end{rem}
+
+\begin{nota}
+Si \(u\in\Sigma\etoile\) est un préfixe de \(m\in\Sigma\etoile\), on note \(u\leq_pm\).
+\end{nota}
+
+\subsection{Langage}
+
+\begin{defi}
+Un langage \(L\) (sur \(\Sigma\)) est un ensemble de mots, \ie une partie de \(\Sigma\etoile\).
+\end{defi}
+
+\begin{ex}
+On pose \(\Sigma=\accol{a,b}\). On peut alors définir les langages sur \(\Sigma\) suivants :
+
+\begin{itemize}
+    \item \(L_1=\accol{ab,aab,aaab}\) \\
+    \item \(L_2=\accol{a^n\tq n\in\Ns}\) \\
+    \item \(L_3=\ensvide\) \\
+    \item \(L_4=\accol{\epsilon}\) \\
+    \item \(L_5\begin{aligned}[t]
+        &=\accol{\text{mots qui contiennent un nombre pair de }a} \\
+        &=\accol{m\in\Sigma\etoile\tq\abs{m}_a\equiv0\croch{2}} \\
+        &\not=\accol{\paren{aa}^n\tq n\in\N}
+    \end{aligned}\) \\
+    \item \(L_6=\accol{m\in\Sigma\etoile\tq\abs{m}_a=\abs{m}_b}\)
+\end{itemize}
+
+Si on considère maintenant l'ensemble des symboles ASCII comme alphabet, alors toute chaîne de caractères ASCII est un mot. Par exemple, tout programme informatique est un mot.
+\end{ex}
+
+\begin{defi}[Opérations sur les langages]
+Soient \(\Sigma\) un alphabet et \(L_1,L_2\in\P{\Sigma\etoile}\).
+
+On définit les langages ci-dessous :
+
+\begin{itemize}
+    \item union : \(L_1\union L_2=\accol{m\in\Sigma\etoile\tq m\in L_1\text{ ou }m\in L_2}\) ; \\
+    \item intersection : \(L_1\inter L_2=\accol{m\in\Sigma\etoile\tq m\in L_1\text{ et }m\in L_2}\) ; \\
+    \item différence : \(L_1\excluant L_2=\accol{m\in\Sigma\etoile\tq m\in L_1\text{ et }m\not\in L_2}\) ; \\
+    \item différence symétrique : \(L_1\difsym L_2=\accol{m\in\Sigma\etoile\tq m\in L_1\text{ et }m\not\in L_2\text{ ou }m\not\in L_1\text{ et }m\in L_2}\) ; \\
+    \item concaténation : \(L_1L_2=\accol{uv\tq\paren{u,v}\in L_1\times L_2}\).
+\end{itemize}
+\end{defi}
+
+\begin{ex}
+On pose \(\Sigma=\accol{a,b}\), \(L_1=\accol{a,ab,\epsilon}\) et \(L_2=\accol{b,a,\epsilon}\).
+
+On a \(L_1L_2=\accol{ab,aa,abb,aba,b,a,\epsilon}\).
+
+De plus, on a \(L_1^2=\accol{aa,aab,a,aba,abab,ab,\epsilon}\not=\accol{aa,abab,\epsilon}\).
+\end{ex}
+
+\begin{defi}
+Soit \(L\in\P{\Sigma\etoile}\).
+
+Pour \(n\in\Ns\), on définit \(L^n=\accol{u_1u_2\dots u_n\tq\quantifs{\forall i\in\interventierii{1}{n}}u_i\in L}\) et on pose \(L^0=\accol{\epsilon}\not=\ensvide\).
+
+On définit \(L\etoile=\bigunion_{n\in\N}L^n\).
+
+On a les propriétés suivantes :
+
+\begin{itemize}
+    \item \(L^0\subset L\etoile\) donc \(\epsilon\in L\etoile\) ; \\
+    \item \(\quantifs{\Tpt n\in\N}L^n\subset L\etoile\) ; \\
+    \item \(m\in L\etoile\ssi\orenv{\quantifs{\exists n\in\Ns;\exists\paren{u_1,\dots,u_n}\in L^n}m=u_1\dots u_n \\ m=\epsilon}\)
+\end{itemize}
+
+On définit \(L^+=\bigunion_{n\in\Ns}L^n\).
+
+On a \(L^+\subset L\etoile\).
+\end{defi}
+
+\begin{rem}
+La définition de \(\Sigma\etoile\) est cohérente en voyant \(\Sigma\) comme un langage.
+\end{rem}
+
+\begin{prop}
+Soient \(\Sigma\) un alphabet et \(L,L_1,L_2\in\P{\Sigma\etoile}\).
+
+On a :
+
+\begin{itemize}
+    \item \(L.\ensvide=\ensvide.L=\ensvide\) ; \\
+    \item \(L.\accol{\epsilon}=\accol{\epsilon}.L=L\) ; \\
+    \item \(L^n.L^m=L^m.L^n=L^{n+m}\) ; \\
+    \item \(L.\paren{L_1\union L_2}=L.L_1\union L.L_2\) ; \\
+    \item \(L.\paren{L_1\inter L_2}\subset L.L_1\inter L.L_2\) ; \\
+    \item \(L\etoile.L=L.L\etoile=L^+\) ; \\
+    \item \(L\etoile=L^+\union\accol{\epsilon}\) ; \\
+    \item \(\paren{L\etoile}\etoile=L\etoile\)
+\end{itemize}
+\end{prop}
+
+\begin{dem}
+\Cf \thref{exo:demonstrationsProprietesLangages}.
+\end{dem}
+
+\section{Langage régulier}
+
+Soit \(\Sigma\) un alphabet.
+
+\begin{defi}
+On définit par induction l'ensemble des langages réguliers \(\LRat\) et l'ensemble des expressions régulières (représentation symbolique des langages) \(\Regexp\).
+
+Cas de base : \[\ensvide\in\LRat\qquad\accol{\epsilon}\in\LRat\qquad\accol{a\tq a\in\Sigma}\in\LRat.\]
+
+Cas induits : pour \(\paren{L_1,L_2}\in\LRat^2\), on a les propriétés de stabilité suivantes : \[L_1\union L_2\in\LRat\qquad L_1L_2\in\LRat\qquad L_1\etoile\in\LRat.\]
+
+De même, on a les cas de bases : \[\ensvide\in\Regexp\qquad\epsilon\in\Regexp\qquad a\in\Regexp\text{ avec }a\in\Sigma\] et les cas induits : pour \(\paren{r_1,r_2}\in\Regexp^2\), on a les propriétés de stabilité suivantes : \[r_1\divise r_2\in\Regexp\qquad r_1r_2\in\Regexp\qquad r_1\etoile\in\Regexp.\]
+\end{defi}
+
+\begin{rem}[HP]
+\(\LRat\) et \(\Regexp\) sont isomorphes.
+\end{rem}
+
+\begin{defi}
+On dit qu'une expression régulière dénote un langage régulier et on note \(\Lendo{r}\) le langage dénoté par \(r\in\Regexp\).
+\end{defi}
+
+\begin{ex}
+On pose \(\Sigma=\accol{a,b}\) et \(r=a\paren{a\divise b}\etoile\in\Regexp\).
+
+Alors \(\Lendo{r}=\accol{a}.\paren{\accol{a}\union\accol{b}}\etoile\) est le langage contenant les mots qui commencent par un \(a\).
+\end{ex}
+
+\begin{prop}
+Tout langage contenant un unique mot est régulier.
+\end{prop}
+
+\begin{ex}
+On a \(\accol{aba}=\accol{a}.\accol{b}.\accol{a}\in\LRat\).
+\end{ex}
+
+\begin{prop}
+Tout langage fini est régulier.
+\end{prop}
+
+\begin{ex}
+On a \(\accol{aa,abc,c}=\accol{aa}\union\accol{abc}\union\accol{c}\in\LRat\).
+\end{ex}
+
+\begin{prop}
+Le langage \(\Sigma\etoile\) est régulier.
+\end{prop}
+
+\begin{dem}
+L'alphabet \(\Sigma\) un langage fini donc c'est un langage régulier donc \(\Sigma\etoile\) est régulier.
+\end{dem}
+
+\begin{defi}
+On dit qu'une expression régulière \(r\in\Regexp\) s'apparie à (ou \guillemets{match}) tout mot de \(\Lendo{r}\).
+
+Quelques cas particuliers :
+
+\begin{itemize}
+    \item \(a\) s'apparie au mot \(a\) ; \\
+    \item \(r_1r_2\) s'apparie à un mot de \(\Lendo{r_1}\) concaténé à un mot de \(\Lendo{r_2}\) ; \\
+    \item \(r_1\divise r_2\) s'apparie à un mot de \(\Lendo{r_1}\) ou à un mot de \(\Lendo{r_2}\) ; \\
+    \item \(r\etoile\) s'apparie à une succession de mots de \(\Lendo{r}\) (incluant la succession de zéro mot \(\epsilon\)) ; \\
+    \item \(\epsilon\) s'apparie au mot vide \(\epsilon\) ; \\
+    \item \(\ensvide\) ne s'apparie à aucun mot ; \\
+    \item \(\Sigma\) s'apparie à n'importe quel symbole ; \\
+    \item \(\Sigma\etoile\) s'apparie à n'importe quel mot.
+\end{itemize}
+\end{defi}
+
+\begin{rem}[Priorités]
+S'appliquent d'abord les étoiles, puis les concaténations et enfin les unions. On peut parenthéser les expressions si nécessaire.
+\end{rem}
+
+\begin{ex}
+Avec \(\Sigma=\accol{a,b}\) :
+
+\begin{itemize}
+    \item on pose \(r_1=\paren{a\divise b}\etoile\). \\ On a \(\Lendo{r_1}\begin{aligned}[t]
+        &=\accol{\text{mots composés de }a\text{ ou de }b} \\
+        &=\accol{a,b}\etoile
+    \end{aligned}\) ; \\
+    \item on pose \(r_2=aa\etoile\). \\ On a \(\Lendo{r_2}=\accol{a^n\tq n\in\Ns}\) ; \\
+    \item on pose \(r_3=\paren{aa}\etoile\). \\ On a \(\Lendo{r_3}=\accol{a^{2k}\tq k\in\N}\) ; \\
+    \item on pose \(r_4=a\Sigma\etoile\). \\ On a \(\Lendo{r_4}=\accol{\text{mots commençant par }a}\).
+\end{itemize}
+
+Avec \(\Sigma=\accol{a,\dots,z,\_}\) (où \(\_\) désigne une espace) :
+
+\begin{itemize}
+    \item l'expression régulière \(ch\paren{at\divise ien}\) s'apparie aux mots \(chat\) et \(chien\) ; \\
+    \item l'expression régulière \(\paren{tres\_}\etoile bien\) s'apparie aux mots \(bien\), \(tres\_ bien\), \(tres\_ tres\_ bien\), ...
+\end{itemize}
+\end{ex}
