@@ -2,4 +2,252 @@
 
 \minitoc
 
+\begin{exo}[Exercice 1, exemple]
+On considère l'automate \(A_0\) ci-dessous :
+
+\begin{center}
+\begin{tikzpicture}
+\node[state, initial above] (q1) {\(q_1\)};
+\node[state, left of=q1] (q0) {\(q_0\)};
+\node[state, below of=q0] (q3) {\(q_3\)};
+\node[state, accepting, right of=q1] (q2) {\(q_2\)};
+\node[state, accepting, below of=q2] (q4) {\(q_4\)};
+
+\path[->] (q1) edge[above] node {\(a\)} (q0)
+          (q1) edge[above] node {\(c\)} (q2)
+          (q3) edge[left] node {\(b\)} (q0)
+          (q3) edge[loop left] node {\(a\)} (q3)
+          (q3) edge[bend right, below] node {\(c\)} (q1)
+          (q2) edge[loop above] node {\(b\)} (q2)
+          (q2) edge[bend left, right] node {\(a\)} (q4)
+          (q2) edge[bend right, left] node {\(c\)} (q4);
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+    \item Utiliser le vocabulaire approprié pour décrire l'automate \(A_0\). En particulier, donner sa définition formelle et représenter sa table de transition. \\
+    \item Donner quelques exemples de mots acceptés par l'automate et de mots rejetés par l'automate. \\
+    \item Donner son équivalent complet puis l'émonder.
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
 \note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 2, déterminisation]
+On considère l'automate \(A_1\) ci-dessous :
+
+\begin{center}
+\begin{tikzpicture}
+\node[state, initial] (q0) {\(q_0\)};
+\node[state, below right of=q0] (q2) {\(q_2\)};
+\node[state, above right of=q2] (q1) {\(q_1\)};
+\node[state, right of=q1, accepting] (q3) {\(q_3\)};
+
+\path[->] (q0) edge[loop above] node {\(a\)} (q0)
+          (q0) edge[above] node {\(a\)} (q1)
+          (q0) edge[below] node {\(b\)} (q2)
+          (q2) edge[loop below] node {\(a,b\)} (q2)
+          (q2) edge[above] node {\(a\)} (q1)
+          (q1) edge[above] node {\(b\)} (q3);
+\end{tikzpicture}
+\end{center}
+
+\begin{enumerate}
+    \item Justifier que l'automate \(A_1\) n'est pas déterministe. \\
+    \item Donner un mot \(m\) pouvant donner lieu à au moins deux calculs, l'un aboutissant à un état final, l'autre aboutissant à un état non-final. Ce mot est-il reconnu par l'automate ? \\
+    \item Déterminer cet automate pour obtenir \(A_{1\,\det}\). Le mot \(m\) est-il reconnu par \(A_{1\,\det}\) ?
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 3, automates \guillemets{évidents}]
+On considère l'alphabet \(\Sigma=\accol{a,b,c}\).
+
+Pour chaque ensemble de mots \(L_i\), donner une expression régulière \(r_i\) dénotant \(L_i\) et dessiner un automate \(A_i\) (déterministe ou non) reconnaissant \(L_i\) :
+
+\begin{enumerate}
+    \item \(L_1\) : les mots de trois lettres qui commencent par \(a\) ; \\
+    \item \(L_2\) : les mots qui ne contiennent qu'un seul \(b\) ; \\
+    \item \(L_3\) : les mots qui ont \(ab\) pour préfixe ; \\
+    \item \(L_4\) : les mots qui ont \(bac\) pour suffixe ; \\
+    \item \(L_5\) : les mots qui ont \(abba\) pour facteur ; \\
+    \item \(L_6\) : les mots qui ont \(abba\) pour sous-mot.
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 4, donner un sens aux états]
+On considère l'alphabet \(\Sigma=\accol{0,1}\). Représenter un automate reconnaissant :
+
+\begin{enumerate}
+    \item l'ensemble des mots contenant un nombre pair de symboles ; \\
+    \item l'ensemble des mots tels que le nombre d'occurrences de \(1\) soit multiple de \(3\) ; \\
+    \item l'ensemble des mots \(m\) tels que \(\abs{m}_0-\abs{m}_1\equiv1\croch{9}\).
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 5, automate déterministe complet]
+On définit un automate déterministe incomplet comme un quintuplet \[A=\paren{Q,\Sigma,q_i,Q_F,\delta:D\subset Q\times\Sigma\to Q}.\]
+
+\begin{enumerate}
+    \item Définir formellement l'automate complet \(A_c\) associé. \\
+    \item Justifier formellement que ces deux automates sont équivalents.
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 6, automate produit]
+On considère l'alphabet \(\Sigma=\accol{a,b}\).
+
+\begin{enumerate}
+    \item Représenter un automate déterministe \(A\) reconnaissant les mots ayant un nombre pair de symboles. \\
+    \item Représenter un automate déterministe \(A\prim\) reconnaissant les mots composés de symboles \(a\) puis de symboles \(b\). \\
+    \item En utilisant l'automate produit, représenter un automate reconnaissant les mots contenant un nombre pair de symboles qui sont composés de symboles \(a\) puis de symboles \(b\). Donner un sens à chaque état de l'automate obtenu.
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 7, déterminisation \guillemets{explosive}]
+On considère l'alphabet \(\Sigma=\accol{a,b}\) et \(n\in\Ns\). On pose \(L_n\) le langage des mots ayant un \(a\) \guillemets{\(n\) lettres avant la fin du mot}. Par exemple, \(L_1\) est le langage des mots ayant un \(a\) une lettre avant la fin, \ie en dernière lettre ; \(L_2\) est le langage des mots ayant un \(a\) deux lettres avant la fin, \ie en avant-dernière lettre.
+
+\begin{enumerate}[series=ex2.7]
+    \item Donner une expression régulière \(e_n\) dénotant \(L_n\). \\
+    \item Donner un automate \(A_n\) non-déterministe à \(n+1\) états qui reconnaît \(L_n\). On nommera \(q_0,\dots,q_n\) les états. \\
+    \item Déterminiser \(A_3\). Combien d'états l'automate obtenu a-t-il ? \\
+    \item Trouver un mot de trois lettres permettant, depuis \(q_0\), d'atteindre exactement l'ensemble des états \(\accol{q_0,q_2}\).
+\end{enumerate}
+
+Plus généralement, on va montrer que l'automate déterminisé associé à \(A_n\) possède \(2^n\) états.
+
+Pour \(m\in\Sigma\etoile\) et \(q\) un état, on note \(A\paren{m}\) l'ensemble des états de \(A_n\) accessibles à la lecture du mot \(m\) et \(L_{\to q}\) le langage reconnu par l'automate \(A_n\) légèrement modifié de sorte que \(q\) soit son unique état final.
+
+\begin{enumerate}[resume=ex2.7]
+    \item Décrire en français les langages \(L_{\to q_0},L_{\to q_1},\dots,L_{\to q_n}\). \\
+    \item Montrer que pour \(m\in\Sigma\etoile\), \(A\paren{m}=\accol{q\tq m\in L_{\to q}}\). \\
+    \item Montrer que pour chaque ensemble d'états \(Q\) contenant \(q_0\), il existe un mot \(m\) tel que \(\abs{m}=n\) et \(A\paren{m}=Q\). \\
+    \item En déduire, le nombre d'états de l'automate déterminisé associé à \(A_n\).
+\end{enumerate}
+
+Peut-être que la méthode de déterminisation construit un automate inutilement compliqué... Est-il possible de trouver un automate déterministe de moins de \(2^n\) états qui reconnaisse \(L_n\) ? Ce qui suit montre que non.
+
+Supposons qu'il existe un automate déterministe complet ayant strictement moins de \(2^n\) états qui reconnaît \(L_n\).
+
+\begin{enumerate}[resume=ex2.7]
+    \item Justifier qu'il existe deux mots \(u\) et \(v\) de longueur \(n\) dont la lecture aboutit au même état. \\
+    \item En considérant la première lettre qui différencie ces deux mots, et en les rallongeant, aboutir à une contradiction.
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 8, lemme d'Arden et application]
+Lemme d'Arden : si \(L\) est un langage vérifiant l'égalité \(L=E.L\union F\) où \(E,F\) sont des langages tels que \(\epsilon\not\in E\), alors \(L=E\etoile.F\).
+
+On peut rencontrer la formulation suivante : \(E\etoile.F\) est l'unique solution de l'équation \(X=E.X\union F\) d'inconnue \(X\), lorsque \(\epsilon\not\in E\).
+
+\begin{enumerate}[series=ex2.8]
+    \item Démontrer le lemme d'Arden (version équation). Montrer que le langage proposé est bien solution de l'équation puis montrer que c'est l'unique solution de l'équation.
+\end{enumerate}
+
+Application : le lemme d'Arden peut servir à exprimer le langage reconnu par un automate sous forme d'expression régulière.
+
+Exemple : on considère l'automate \(A\) ci-dessous :
+
+\begin{center}
+\begin{tikzpicture}
+\node[state, initial] (q1) {\(q_1\)};
+\node[state, below right of=q1, accepting] (q3) {\(q_3\)};
+\node[state, above right of=q3] (q2) {\(q_2\)};
+
+\path[->] (q1) edge[above] node {\(a\)} (q2)
+          (q1) edge[below] node {\(b\)} (q3)
+          (q3) edge[loop below] node {\(a,b\)} (q3)
+          (q2) edge[loop right] node {\(b\)} (q2)
+          (q2) edge[below] node {\(a\)} (q3);
+\end{tikzpicture}
+\end{center}
+
+Pour \(i\in\accol{1,2,3}\), on note \(L_i\) le langage reconnu en prenant \(q_i\) pour état initial.
+
+\begin{enumerate}[resume=ex2.8]
+    \item Pour chaque état \(q_i\), établir une relation entre les \(L_i\). \\
+    \item À l'aide du lemme d'Arden, donner une expression pour les langages \(L_i\). \\
+    \item En déduire le langage reconnu par l'automate.
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 9, langages non-rationnels]
+Montrer que les langages ci-dessous ne sont pas rationnels :
+
+\begin{enumerate}
+    \item \(L_1=\accol{a^nb^n\tq n\in\N}\) ; \\
+    \item \(L_2=\accol{a^p\tq p\text{ est premier}}\) ; \\
+    \item \(L_3=\accol{m\tq\abs{m}_a=\abs{m}_b}\).
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 10, vers l'automate de Glushkov : automate local]
+Montrer que la procédure de construction de l'automate local \(A_\loc\) associé à un langage local \(LL\) est correcte, \cad que \(\Lendo{A_\loc}=LL\).
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 11, vers l'automate de Glushkov : ensembles \guillemets{caractéristiques}]
+Pour les langages suivants, déterminer les ensembles caractéristiques \(P\paren{L}\), \(S\paren{L}\), \(F\paren{L}\) et \(N\paren{L}\), puis déterminer si le langage est local :
+
+\begin{enumerate}
+    \item \(L_1=\Lendo{abab}\) ; \\
+    \item \(L_2=\Lendo{abc}\) ; \\
+    \item \(L_3=\Lendo{a\etoile}\) ; \\
+    \item \(L_4=\Lendo{\paren{ab}\etoile}\) ; \\
+    \item \(L_5=\Lendo{\paren{ab}\etoile a\etoile}\).
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}
+
+\begin{exo}[Exercice 12, vers l'automate de Glushkov : propriétés des langages linéaires]
+\begin{enumerate}
+    \item Soit \(L\) un langage local. Exprimer \(P\paren{L\etoile}\), \(S\paren{L\etoile}\) et \(F\paren{L\etoile}\) en fonction de \(P\paren{L}\), \(S\paren{L}\) et \(F\paren{L}\) ; montrer que \(L\etoile\) est un langage local. \\
+    \item De même, montrer que l'union de deux langages locaux sur des alphabets distincts est un langage local. \\
+    \item De même, montrer que la concaténation de deux langages locaux sur des alphabets distincts est un langage local. \\
+    \item Montrer que \(\ensvide\), \(\accol{\epsilon}\) et \(\accol{a}\) avec \(a\in\Sigma\) sont des langages locaux. \\
+    \item En déduire que le langage dénoté par une expression régulière linéaire est local.
+\end{enumerate}
+\end{exo}
+
+\begin{corr}
+\note{À venir}
+\end{corr}

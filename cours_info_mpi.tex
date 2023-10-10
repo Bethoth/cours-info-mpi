@@ -26,7 +26,8 @@
 
 % Useful to create any kind of visual representation (graph functions, illustrate geometry problems, etc)
 \usepackage{tikz}
-\usetikzlibrary{patterns,angles,quotes,arrows,arrows.meta,bending,matrix,calc}
+\usetikzlibrary{patterns,angles,quotes,arrows,arrows.meta,bending,matrix,calc,positioning,automata}
+\tikzset{->,>=stealth',node distance=3cm,every state/.style={thick,fill=gray!10},initial text=$ $}
 
 % Allows to edit the itemize environment's default item document-wide.
 \usepackage{enumitem}
@@ -759,6 +760,7 @@ per-mode=power-positive-first
 
 \newcommand{\LRat}{\operatorname{LRat}}
 \newcommand{\Regexp}{\operatorname{R}}
+\newcommand{\loc}{\mathrm{loc}}
 
 \begin{document}
 \renewcommand{\labelitemi}{\(\triangleright\)}
